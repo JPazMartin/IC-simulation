@@ -50,7 +50,7 @@ def plotFrame(ax, fig, x, nPosNew, nENew, nNegNew, eField, time):
     ax[0].set_xlabel("Distance (mm)")
     ax[1].set_xlabel("Distance (mm)")
 
-    ax[0].set_ylabel(r"Charge densities (m$^{-3}$)")
+    ax[0].set_ylabel(r"Carrier densities (m$^{-3}$)")
     ax[1].set_ylabel(r"Electric field (kV\,m$^{-1}$)")
     
     fig.tight_layout(rect = [0, 0, 1, 1.05])
