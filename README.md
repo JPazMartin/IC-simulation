@@ -8,7 +8,7 @@ To install the code, clone the repository:
 ```
 git clone https://github.com/JPazMartin/ICSimulation.git
 ```
-and run:
+and run inside the folder:
 ```
 pip install .
 ```
