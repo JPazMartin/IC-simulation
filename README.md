@@ -4,11 +4,11 @@ Code for the simulation in 1D of the charge collection efficiency of parallel-pl
 Examples `exampleCIC.py`, `exampleCIC2.py`, `examplePPIC.py`, `examplePPIC2.py` and `exampleSIC.py` show how to work with the code.
 
 ## Install the code
-To install clone the repository
+To install the code, clone the repository:
 ```
 git clone https://github.com/JPazMartin/ICSimulation.git
 ```
-and run
+and run:
 ```
 pip install .
 ```
