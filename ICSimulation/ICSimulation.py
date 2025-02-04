@@ -1,6 +1,6 @@
 import numpy            as np
 import matplotlib.pylab as plt
-import sys
+import os, sys
 
 from .             import utils as u
 from .ion_mobility import mob_pos, mob_neg
