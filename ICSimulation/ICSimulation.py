@@ -310,7 +310,7 @@ def pulsedSimulation(dpp, pulseDuration, alpha, voltage, temperature, pressure,
     k_TP = (273.15 + temperature) / u.refTemperature * u.refPressure / pressure
     
     # Load electron properties
-    file_path = os.path.join(sys.prefix, 'data')
+    file_path = os.path.join(sys.prefix, '.dataICSimulation')
     eTable    = np.loadtxt(f"{file_path}/dataElectrons.txt")
 
     # Temperature and pressure scaling rules.

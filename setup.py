@@ -8,5 +8,5 @@ setup(
     description  = "Code for simulating parallel-plate, cylindrical and spherical ionization chambers",
     keywords     = "recombination ionization chambers",
     packages     = ["ICSimulation"],
-    data_files   = [('data', ['data/dataElectrons.txt'])]
+    data_files   = [('.dataICSimulation', ['data/dataElectrons.txt'])]
 )
