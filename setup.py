@@ -7,5 +7,6 @@ setup(
     author_email = "jose.martin@usc.es",
     description  = "Code for simulating parallel-plate, cylindrical and spherical ionization chambers",
     keywords     = "recombination ionization chambers",
-    packages     = ["ICSimulation"]
+    packages     = ["ICSimulation"],
+    data_files   = [('data', ['data/dataElectrons.txt'])]
 )

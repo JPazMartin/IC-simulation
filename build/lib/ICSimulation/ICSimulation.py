@@ -1,6 +1,6 @@
 import numpy            as np
 import matplotlib.pylab as plt
-import sys
+import os
 
 from .             import utils as u
 from .ion_mobility import mob_pos, mob_neg
@@ -310,6 +310,9 @@ def pulsedSimulation(dpp, pulseDuration, alpha, voltage, temperature, pressure,
     k_TP = (273.15 + temperature) / u.refTemperature * u.refPressure / pressure
     
     # Load electron properties
+    c_dir  = os.path.dirname(__file__)
+    import sys
+    #eTable = np.loadtxt(f"{c_dir}/../data/dataElectrons.txt")
     file_path = os.path.join(sys.prefix, 'data')
     eTable    = np.loadtxt(f"{file_path}/dataElectrons.txt")
 
