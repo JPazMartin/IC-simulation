@@ -12,7 +12,10 @@ and run
 ```
 pip install .
 ```
-inside the package folder.
+inside the package folder. If it is necessary, install the required dependencies before:
+```
+pip install -r requirements.txt
+```
 
 ## References
 Paz-Martín, J., Schüller, A., Bourgouin, A., González-Castaño, D. M.,Gómez-Fernández, N., Pardo-Montero, J., & Gómez, F. (2022). Numerical modeling of air-vented parallel plate ionization chambers for ultra-high dose rate applications. Physica medica, 103, 147–156. https://doi.org/10.1016/j.ejmp.2022.10.006
