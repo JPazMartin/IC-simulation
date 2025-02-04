@@ -1,5 +1,5 @@
 """
-    Example of the usage of the module for a spherical ionization chamber.
+    Example of the usage of the module for a cylindrical ionization chamber.
 
     Explanation of the variables in detail:
 
@@ -14,6 +14,7 @@
                     the CCE may depend on the sign of this value.
     r1            : Internal radii of the cylindrical ionization chamber in m.
     r2            : External radii of the cylindrical ionization chamber in m.
+    h             : Heigh of the cylindrical ionization chamber in m.
     Ndw           : Calibration coefficient of the ionization chamber in Gy C^{-1}.
                     The calibration coefficient must have applied all the factor
                     related to the charge released in the medium but not the
@@ -39,30 +40,30 @@
 
 import time
 import matplotlib.pylab as plt
-import numpy            as np
-import utils            as u
 
-from ICSimulation import SICpulsedSimulation
+from ICSimulation import CICpulsedSimulation
 
-dpp           = 1        # Gy
+dpp           = 5        # Gy
 alpha         = 1.3E-12  # m^3/s
 pulseDuration = 1.0E-6   # s
 temperature   = 20.0     # degree celsius
 pressure      = 1013.25  # hPa
 rHumidity     = 50       # %
-voltage       = -200     # V
+voltage       = 200      # V
 r1            = 0.500E-3 # m
-r2            = 1.000E-3 # m
-n             = 1000
+r2            = 2.333E-3 # m
+h             = 0.500E-3 # m
+n             = 2000
 fig           = 0        # No figure display
 eFieldP       = 1        # Electric field perturbation activated
-Ndw           = 7.7E9    # Gy/C
+Ndw           = 3.46E9   # Gy/C
+
 
 inputParameters = [dpp, pulseDuration, alpha, voltage, temperature,
-                    pressure, rHumidity, r1, r2, n, Ndw, fig, eFieldP]
+                    pressure, rHumidity, r1, r2, h, n, Ndw, fig, eFieldP]
 
 t0 = time.time()
-CCE, FEF0, FEF1, Q_coll, I = SICpulsedSimulation(*inputParameters)
+CCE, FEF0, FEF1, Q_coll, I = CICpulsedSimulation(*inputParameters)
 
 # This function returns:
 #

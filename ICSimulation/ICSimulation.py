@@ -1,9 +1,9 @@
 import numpy            as np
 import matplotlib.pylab as plt
-import utils            as u 
 import os
 
-from ion_mobility import mob_pos, mob_neg
+from .             import utils as u
+from .ion_mobility import mob_pos, mob_neg
 
 def CICpulsedSimulation(dpp, pulseDuration, alpha, voltage, temperature, pressure,
                         humidity, r1, r2, h, n, Ndw, figures = 0, eFieldP = 1,
@@ -311,7 +311,7 @@ def pulsedSimulation(dpp, pulseDuration, alpha, voltage, temperature, pressure,
     
     # Load electron properties
     c_dir  = os.path.dirname(__file__)
-    eTable = np.loadtxt(f"{c_dir}/Data/dataElectrons.txt")
+    eTable = np.loadtxt(f"{c_dir}/../data/dataElectrons.txt")
 
     # Temperature and pressure scaling rules.
     eTable[:, 0] /= k_TP 

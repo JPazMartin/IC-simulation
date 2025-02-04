@@ -1,6 +1,5 @@
 """
-    Example of the usage of the module for a parallel plate ionization chamber
-    and a custom pulse structure.
+    Example of the usage of the module for a spherical ionization chamber.
 
     Explanation of the variables in detail:
 
@@ -11,15 +10,21 @@
     temperature   : Temperature of the air in the ionization chamber in degree Celsius.
     pressure      : Pressure of the air inside the ionization chamber in hPa.
     rHumidity     : Relative humidity of the air in the ionization chamber in %.
-    voltage       : Bias applied voltage (always positive) in V.
-    d             : Distance between electrodes of the ionization chamber in m.
-    radii         : Radii of the sensitive volume of the chamber in m.
+    voltage       : Bias applied voltage in V. For spherical and cylindrical IC
+                    the CCE may depend on the sign of this value.
+    r1            : Internal radii of the cylindrical ionization chamber in m.
+    r2            : External radii of the cylindrical ionization chamber in m.
     Ndw           : Calibration coefficient of the ionization chamber in Gy C^{-1}.
                     The calibration coefficient must have applied all the factor
                     related to the charge released in the medium but not the
                     temperature and pressure correction which the simulation will
                     take into account.
     n             : Number of discretization steps in position. A reasonable number
+                    is around 1000. You may increase to have lower numerical error.
+    fig           : If true, a figure will be display with the electric field and the
+                    charge densities
+    eFieldP       : Flag to activate/deactivate the electric field perturbation.
+                    By default it is activated.
 
     +- Optional arguments:
     fig           : If true, a figure will be display with the electric field and the
@@ -31,37 +36,31 @@
                     structure. The values will be normalized internally to fulfill
                     int(dStruct * dt) = dpp 
 """
+
 import time
 import matplotlib.pylab as plt
-import numpy            as np
-import utils            as u
 
-from ICSimulation import PPICpulsedSimulation
+from ICSimulation import SICpulsedSimulation
 
-dpp            = 0.1415  # Gy
-alpha          = 1.1E-12 # m^{3}s^{-1}
-pulseDuration  = 2.5E-6  # s
-temperature    = 18.77   # ºC
-pressure       = 1013.0  # hPa
-rHumidity      = 50      # %
-voltage        = 100     # V
-d              = 2E-3    # m
-radii          = 8.00E-3 # m
-Ndw            = 8.18E7  # Gy C^{-1}
-kQ             = 0.8954
-n              = 3000
-fig            = 0
-eFieldP        = 1
+dpp           = 1        # Gy
+alpha         = 1.3E-12  # m^3/s
+pulseDuration = 1.0E-6   # s
+temperature   = 20.0     # degree celsius
+pressure      = 1013.25  # hPa
+rHumidity     = 50       # %
+voltage       = -200     # V
+r1            = 0.500E-3 # m
+r2            = 1.000E-3 # m
+n             = 1000
+fig           = 0        # No figure display
+eFieldP       = 1        # Electric field perturbation activated
+Ndw           = 7.7E9    # Gy/C
 
-dStruct = np.ones(1000)
-tStruct = np.linspace(0, 2.5E-6, 1000)
-
-inputParameters = [dpp, pulseDuration, alpha, voltage, temperature, pressure,
-                   rHumidity, d, radii, n, Ndw * kQ, fig, eFieldP, tStruct,
-                   dStruct]
+inputParameters = [dpp, pulseDuration, alpha, voltage, temperature,
+                    pressure, rHumidity, r1, r2, n, Ndw, fig, eFieldP]
 
 t0 = time.time()
-CCE, FEF0, FEF1, Q_coll, I = PPICpulsedSimulation(*inputParameters)
+CCE, FEF0, FEF1, Q_coll, I = SICpulsedSimulation(*inputParameters)
 
 # This function returns:
 #
@@ -71,7 +70,7 @@ CCE, FEF0, FEF1, Q_coll, I = PPICpulsedSimulation(*inputParameters)
 # FEF1   : Free electron fraction in relation to the collected charge.
 # Q_coll : Collected charge per pulse referenced to 20 ºC and 1013.25 hPa.
 # I      : Array with the times and the  induced current by each charge carrier
-#          in A.
+#          in A
 
 print(f"CCE    = {CCE:.4f}")
 print(f"FEF0   = {FEF0:.4f}")
@@ -90,7 +89,7 @@ ax.plot(I[:, 0] * 1E6, I[:, 3] * 1E3, "-m", label = "Negative ions")
 ax.set_xlabel(r"Time (us)")
 ax.set_ylabel(r"Intensity (mA)")
 
-ax.set_ylim([1E-4, 1E-1])
+ax.set_ylim([1E-4, 1E0])
 ax.set_xlim([1E-6, 1E3])
 
 ax.set_xscale("log")

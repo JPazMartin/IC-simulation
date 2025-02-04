@@ -1,5 +1,6 @@
 """
-    Example of the usage of the module for a parallel plate ionization chamber.
+    Example of the usage of the module for a parallel plate ionization chamber
+    and a custom pulse structure.
 
     Explanation of the variables in detail:
 
@@ -19,7 +20,6 @@
                     temperature and pressure correction which the simulation will
                     take into account.
     n             : Number of discretization steps in position. A reasonable number
-                    is around 1000. You may increase to have lower numerical error.
 
     +- Optional arguments:
     fig           : If true, a figure will be display with the electric field and the
@@ -31,10 +31,10 @@
                     structure. The values will be normalized internally to fulfill
                     int(dStruct * dt) = dpp 
 """
+
 import time
 import matplotlib.pylab as plt
 import numpy            as np
-import utils            as u
 
 from ICSimulation import PPICpulsedSimulation
 
@@ -53,8 +53,12 @@ n              = 3000
 fig            = 0
 eFieldP        = 1
 
+dStruct = np.ones(1000)
+tStruct = np.linspace(0, 2.5E-6, 1000)
+
 inputParameters = [dpp, pulseDuration, alpha, voltage, temperature, pressure,
-                   rHumidity, d, radii, n, Ndw * kQ, fig, eFieldP]
+                   rHumidity, d, radii, n, Ndw * kQ, fig, eFieldP, tStruct,
+                   dStruct]
 
 t0 = time.time()
 CCE, FEF0, FEF1, Q_coll, I = PPICpulsedSimulation(*inputParameters)
