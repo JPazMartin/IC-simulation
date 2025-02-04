@@ -5,10 +5,12 @@ Examples `exampleCIC.py`, `exampleCIC2.py`, `examplePPIC.py`, `examplePPIC2.py` 
 
 ## Install the code
 To install clone the repository
-```git clone https://github.com/JPazMartin/ICSimulation.git
+```
+git clone https://github.com/JPazMartin/ICSimulation.git
 ```
 and run
-```pip install .
+```
+pip install .
 ```
 inside the package folder.
 
